@@ -1,0 +1,37 @@
+
+
+minetest.register_node("beer:empty_barrel", {
+	description = S("Empty barrel"),
+	tiles = {"beer_barrel.png", "beer_barrel.png", "beer_barrel.png^[transformR90",
+	"beer_barrel.png^[transformR90", "beer_barrel_face.png", "beer_barrel_face.png"},
+	paramtype2 = "facedir",
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=1,flammable=2},
+	sounds = default.node_sound_wood_defaults(),
+	furnace_burntime = 20,
+})
+
+minetest.register_node("beer:beer_barrel", {
+	description = S("Beer barrel"),
+	tiles = {"beer_barrel.png", "beer_barrel.png", "beer_barrel.png^[transformR90",
+	"beer_barrel.png^[transformR90", "beer_barrel_face.png", "beer_barrel_face.png"},
+	paramtype2 = "facedir",
+	groups = {snappy=1,choppy=2,oddly_breakable_by_hand=1,flammable=2},
+	sounds = default.node_sound_wood_defaults(),
+	furnace_burntime = 20,
+})
+
+minetest.register_craft({
+	output = "beer:empty_barrel",
+	recipe = {
+		{"default:steel_ingot","default:wood","default:steel_ingot"},
+		{"default:wood",                ""          ,"default:wood"},
+		{"default:steel_ingot","default:wood","default:steel_ingot"}},
+})
+
+minetest.register_craft({
+	type = "shapeless",	
+	output = "beer:beer_barrel",
+	recipe = {"beer:empty_barrel","beer_fine_beer_mix"},
+})
+
+
