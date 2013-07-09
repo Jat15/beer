@@ -4,6 +4,17 @@ minetest.register_craftitem("beer:cone", {
 	description = "cone",
 	inventory_image = "beer_cone.png",
 })
+--[[
+minetest.register_globalstep(function(dtime)
+	for _, p in ipairs(minetest.get_connected_players()) do
+		
+
+
+
+	end
+end)]]
+--je voudrais ajouter des particules autour du joueur quand il est bourré
+--I'd like to add some particles around the player when he's drank
 
 
 minetest.register_craftitem("beer:crude_beer_mix", {
