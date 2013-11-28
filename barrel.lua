@@ -13,15 +13,15 @@ minetest.register_node("beer:beer_barrel", {
 			meta:set_int("beer_amount",beer_amount - 1)
 			meta:set_string("infotext","Beer barrel, "..beer_amount.." beers left")
 			if meta:get_int("beer_amount") <= -1 then
-				minetest.sound_play("empty_barrel")
+				minetest.sound_play("empty_barrel",{pos = pos, max_hear_distance = 15,})
 				meta:set_int("beer_amount",0)
 				return
 			end
-			minetest.sound_play("have_a_beer")
+			minetest.sound_play("have_a_beer",{pos = pos, max_hear_distance = 15,})
 			return ItemStack("beer:beer_tankard ")
 		end
 		if string.find(itemstack:to_string(), "fine_beer_mix") ~= nil then
-			minetest.sound_play("filled_barrel")
+			minetest.sound_play("filled_barrel",{pos = pos, max_hear_distance = 15,})
 			if meta:get_int("beer_amount") >=99 then
 				return
 			end

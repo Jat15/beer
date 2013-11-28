@@ -16,7 +16,7 @@ minetest.register_craftitem("beer:beer_tankard", {
 	inventory_image = "beer_beer_tankart.png",
 	stack_max = 1,
 	on_use = function(itemstack, user, pointed_thing)
-		minetest.sound_play("drink_a_beer")
+		minetest.sound_play("drink_a_beer",{pos = user:getpos(), max_hear_distance = 10,})
 		drunklevel[user:get_player_name()] = drunklevel[user:get_player_name()] + 1
 		name = user:get_player_name()
 		minetest.after(30, decrDrunkLevel,name)
