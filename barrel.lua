@@ -1,5 +1,13 @@
+local S
+
+if intllib then
+	S = intllib.Getter()
+else
+	S = function(s) return s end
+end
+
 minetest.register_node("beer:beer_barrel", {
-	description = "Beer barrel",
+	description = S("Beer barrel"),
 	tiles = {"beer_barrel.png", "beer_barrel.png", "beer_barrel.png^[transformR90",
 	"beer_barrel.png^[transformR90", "beer_barrel_face.png", "beer_barrel_face.png"},
 	paramtype2 = "facedir",
@@ -11,7 +19,7 @@ minetest.register_node("beer:beer_barrel", {
 		local beer_amount = meta:get_int("beer_amount")
 		if itemstack:to_string() == "beer:empty_tankard" then
 			meta:set_int("beer_amount",beer_amount - 1)
-			meta:set_string("infotext","Beer barrel, "..beer_amount.." beers left")
+			meta:set_string("infotext",S("Beer barrel, %d beers left"):format(beer_amount))
 			if meta:get_int("beer_amount") <= -1 then
 				minetest.sound_play("empty_barrel",{pos = pos, max_hear_distance = 15,})
 				meta:set_int("beer_amount",0)
@@ -26,7 +34,7 @@ minetest.register_node("beer:beer_barrel", {
 				return
 			end
 			meta:set_int("beer_amount",beer_amount + 10)
-			meta:set_string("infotext","Beer barrel, "..beer_amount.." beers left")
+			meta:set_string("infotext",S("Beer barrel, %d beers left"):format(beer_amount))
 			itemstack:take_item(1)
 			return itemstack
 		end
@@ -36,7 +44,7 @@ minetest.register_node("beer:beer_barrel", {
 		if meta:get_int("beer_amount") == nil then
 			meta:set_int("beer_amount", 0)
 		end
-		meta:set_string("infotext","Beer barrel, "..meta:get_int("beer_amount").." beers left")
+		meta:set_string("infotext",S("Beer barrel, %d beers left"):format(meta:get_int("beer_amount")))
 	end,
 })
 

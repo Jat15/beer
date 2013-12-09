@@ -1,0 +1,10 @@
+### init.lua ###
+
+Empty tankart = Chope vide
+Beer tankart = Chope de bière
+
+### barrel.lua ###
+
+Beer barrel = Barile de bière 
+
+Beer barrel, %d beers left = Le barile de bière ne contient plus que pour %d chope.
