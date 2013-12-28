@@ -17,7 +17,7 @@ minetest.register_node("beer:beer_barrel", {
 	on_rightclick = function(pos, node, clicker, itemstack)
 		local meta = minetest.get_meta(pos);
 		local beer_amount = meta:get_int("beer_amount")
-		if itemstack:to_string() == "beer:empty_tankard" then
+		if itemstack:get_name() == "beer:empty_tankard" then
 			meta:set_int("beer_amount",beer_amount - 1)
 			meta:set_string("infotext",S("Beer barrel, %d beers left"):format(beer_amount))
 			if meta:get_int("beer_amount") <= -1 then
@@ -26,13 +26,15 @@ minetest.register_node("beer:beer_barrel", {
 				return
 			end
 			minetest.sound_play("have_a_beer",{pos = pos, max_hear_distance = 15,})
-			return ItemStack("beer:beer_tankard ")
+			itemstack:take_item(1)
+			clicker:get_inventory():add_item("main", "beer:beer_tankard")
+			return
 		end
-		if string.find(itemstack:to_string(), "fine_beer_mix") ~= nil then
-			minetest.sound_play("filled_barrel",{pos = pos, max_hear_distance = 15,})
+		if itemstack:get_name()== "hops:hops_fine_beer_mix" then
 			if meta:get_int("beer_amount") >=99 then
 				return
 			end
+			minetest.sound_play("filled_barrel",{pos = pos, max_hear_distance = 15,})
 			meta:set_int("beer_amount",beer_amount + 10)
 			meta:set_string("infotext",S("Beer barrel, %d beers left"):format(beer_amount))
 			itemstack:take_item(1)
